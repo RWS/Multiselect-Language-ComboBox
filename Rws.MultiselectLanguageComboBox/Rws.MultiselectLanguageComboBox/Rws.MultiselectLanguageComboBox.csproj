@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\SdlCommunity.snk</AssemblyOriginatorKeyFile>
+    <Title>Rws.MultiselectLanguageComboBox</Title>
+    <Description>WPF custom control with multiple language selection capabilities (shown by flags), customizable item grouping, sorting and filtering for the collection.</Description>
+    <Copyright>Copyright © Sdl Community 2023</Copyright>
+    <PackageTags>WPF MultiselectLanguageCombo</PackageTags>
+    <RepositoryUrl>https://github.com/sdl/Multiselect-Language-ComboBox</RepositoryUrl>
+  </PropertyGroup>
+
+</Project>
