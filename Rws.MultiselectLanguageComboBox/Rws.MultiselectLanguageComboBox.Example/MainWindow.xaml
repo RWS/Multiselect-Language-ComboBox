@@ -6,7 +6,8 @@
         xmlns:lc="clr-namespace:Rws.MultiselectLanguageComboBox;assembly=Rws.MultiselectLanguageComboBox"
         mc:Ignorable="d"
         Title="MultiselectLanguageComboBox Example" Height="450" Width="800">
-    <Grid>
-        <lc:MultiselectLanguageComboBox/>
-    </Grid>
+    <StackPanel DataContext="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
+        <lc:MultiselectLanguageComboBox Height="30" Margin="4"
+            SelectedLanguages="{Binding SelectedLanguages}"/>
+    </StackPanel>
 </Window>
