@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MultiselectLanguageComboBox Example" Height="450" Width="800">
     <StackPanel DataContext="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
-        <lc:MultiselectLanguageComboBox Height="30" Margin="4"
+        <lc:MultiselectLanguageComboBox Margin="4"
             SelectedLanguages="{Binding SelectedLanguages}"/>
     </StackPanel>
 </Window>
