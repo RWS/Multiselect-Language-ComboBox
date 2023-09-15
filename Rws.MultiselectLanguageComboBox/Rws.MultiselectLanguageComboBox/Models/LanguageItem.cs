@@ -8,7 +8,6 @@ namespace Rws.MultiselectLanguageComboBox.Models
 {
     public class LanguageItem : IItemEnabledAware, IItemGroupAware, INotifyPropertyChanged
     {
-        private string _id;
         private string _name;
         private bool _isEnabled;
         private int _selectedOrder;
@@ -21,23 +20,7 @@ namespace Rws.MultiselectLanguageComboBox.Models
             _selectedOrder = -1;
         }
 
-        /// <summary>
-        /// Unique id in the collection
-        /// </summary>
-        public string Id
-        {
-            get => _id;
-            set
-            {
-                if (_id != null && string.Compare(_id, value, StringComparison.InvariantCulture) == 0)
-                {
-                    return;
-                }
-
-                _id = value;
-                OnPropertyChanged(nameof(Id));
-            }
-        }
+        public string Id { get; set; }
 
         /// <summary>
         /// The item name.
@@ -133,8 +116,6 @@ namespace Rws.MultiselectLanguageComboBox.Models
                 OnPropertyChanged(nameof(ImageUri));
             }
         }
-
-        public CultureInfo CultureInfo { get; set; }
 
         public override string ToString()
         {

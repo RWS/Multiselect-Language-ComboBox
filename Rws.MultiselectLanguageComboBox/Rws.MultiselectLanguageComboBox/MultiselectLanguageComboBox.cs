@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
-using System.Windows.Media.Imaging;
 using Rws.MultiselectLanguageComboBox.Models;
 using Rws.MultiselectLanguageComboBox.Services;
 using Sdl.MultiSelectComboBox.Themes.Generic;
@@ -38,37 +37,154 @@ namespace Rws.MultiselectLanguageComboBox
             set { SetValue(SelectedLanguagesProperty, value); }
         }
 
-        public static readonly DependencyProperty LanguageGroupServiceProperty = DependencyProperty.Register("LanguageGroupService", typeof(IGroupingService), typeof(MultiselectLanguageComboBox), new PropertyMetadata());
-        public IGroupingService LanguageGroupService
+        private ILanguageInfoService _languageInfoService;
+        public ILanguageInfoService LanguageInfoService
         {
-            get { return (IGroupingService)GetValue(LanguageGroupServiceProperty); }
-            set { SetValue(LanguageGroupServiceProperty, value); }
+            get
+            {
+                if (_languageInfoService == null)
+                {
+                    _languageInfoService = new DefaultLanguageInfoService();
+                }
+                return _languageInfoService;
+            }
+            set
+            {
+                _languageInfoService = value;
+            }
         }
 
         private static void OnLanguagesSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var component = d as MultiselectLanguageComboBox;
-            if (component == null)
-            {
-                return;
-            }
-            
-            var items = new ObservableCollection<LanguageItem>();
-            component.AddLanguageItems(items, component.LanguagesSource);
-            component.ItemsSource = items;
+            component?.OnLanguagesSourceChanged(e.OldValue as ObservableCollection<string>);
         }
 
         private static void OnSelectedLanguagesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var component = d as MultiselectLanguageComboBox;
-            if (component == null)
+            component?.OnSelectedLanguagesChanged(e.OldValue as ObservableCollection<string>);
+        }
+
+        private void OnLanguagesSourceChanged(ObservableCollection<string> oldLanguagesSource)
+        {
+            if (oldLanguagesSource != null)
+            {
+                oldLanguagesSource.CollectionChanged -= LanguagesSource_CollectionChanged;
+            }
+
+            _languageItemsMap.Clear();
+            var items = new ObservableCollection<LanguageItem>();
+            AddLanguageItems(items, LanguagesSource);
+            ItemsSource = items;
+
+            if (LanguagesSource != null)
+            {
+                LanguagesSource.CollectionChanged += LanguagesSource_CollectionChanged;
+            }
+        }
+
+        private void OnSelectedLanguagesChanged(ObservableCollection<string> oldSelectedLanguages)
+        {
+            if (oldSelectedLanguages != null)
+            {
+                oldSelectedLanguages.CollectionChanged -= SelectedLanguages_CollectionChanged;
+            }
+
+            var oldSelectedItems = SelectedItems as ObservableCollection<LanguageItem>;
+            if (oldSelectedItems != null)
+            {
+                oldSelectedItems.CollectionChanged -= SelectedItems_CollectionChanged;
+            }
+
+            var selectedItems = new ObservableCollection<LanguageItem>();
+            AddLanguageItems(selectedItems, SelectedLanguages);
+            SelectedItems = selectedItems;
+
+            if (SelectedLanguages != null)
+            {
+                SelectedLanguages.CollectionChanged += SelectedLanguages_CollectionChanged;
+            }
+
+            if (selectedItems != null)
+            {
+                selectedItems.CollectionChanged += SelectedItems_CollectionChanged;
+            }
+        }
+
+        private void LanguagesSource_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            var items = ItemsSource as ObservableCollection<LanguageItem>;
+            if (items == null)
             {
                 return;
             }
 
-            var selectedItems = new ObservableCollection<LanguageItem>();
-            component.AddLanguageItems(selectedItems, component.SelectedLanguages);
-            component.SelectedItems = selectedItems;
+            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
+            {
+                foreach (string language in e.NewItems)
+                {
+                    AddLanguageItem(items, language);
+                }
+            }
+
+            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
+            {
+                foreach (string language in e.OldItems)
+                {
+                    RemoveLanguageItem(items, language);
+                }
+            }
+        }
+
+        private void SelectedLanguages_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            var selectedItems = SelectedItems as ObservableCollection<LanguageItem>;
+            if (selectedItems == null)
+            {
+                return;
+            }
+
+            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
+            {
+                foreach (string language in e.NewItems)
+                {
+                    if (selectedItems.All(i => i.Id != language))
+                    {
+                        AddLanguageItem(selectedItems, language);
+                    }
+                }
+            }
+
+            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
+            {
+                foreach (string language in e.OldItems)
+                {
+                    RemoveLanguageItem(selectedItems, language);
+                }
+            }
+        }
+
+        private void SelectedItems_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
+            {
+                foreach (LanguageItem item in e.NewItems)
+                {
+                    if (!SelectedLanguages.Contains(item.Id))
+                    {
+                        SelectedLanguages.Add(item.Id);
+                    }
+                }
+            }
+
+            if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
+            {
+                foreach (LanguageItem item in e.OldItems)
+                {
+                    SelectedLanguages.Remove(item.Id);
+                }
+            }
         }
 
         private Dictionary<string, LanguageItem> _languageItemsMap = new Dictionary<string, LanguageItem>();
@@ -86,8 +202,6 @@ namespace Rws.MultiselectLanguageComboBox
             }
         }
 
-        private LanguageItemGroup _group = new LanguageItemGroup(-1, "All");
-
         private void AddLanguageItem(ObservableCollection<LanguageItem> items, string language)
         {
             if (language == null)
@@ -102,18 +216,25 @@ namespace Rws.MultiselectLanguageComboBox
             }
             else
             {
-                var cultureInfo = CultureInfo.GetCultureInfo(language);
                 item = new LanguageItem
                 {
-                    Id = cultureInfo.Name,
-                    Name = cultureInfo.EnglishName,
-                    Group = _group,
-                    ImageUri = new Uri($"pack://application:,,,/Rws.MultiselectLanguageComboBox;component/Images/{language}.png"),
-                    CultureInfo = cultureInfo
+                    Id = language,
+                    Name = LanguageInfoService.GetDisplayName(language),
+                    Group = LanguageInfoService.GetItemGroup(language),
+                    ImageUri = new Uri($"pack://application:,,,/Rws.MultiselectLanguageComboBox;component/Images/{language}.ico"),
                 };
                 _languageItemsMap.Add(language, item);
             }
             items.Add(item);
+        }
+
+        private void RemoveLanguageItem(ObservableCollection<LanguageItem> items, string language)
+        {
+            var item = items.FirstOrDefault(i => i.Id == language);
+            if (item != null)
+            {
+                items.Remove(item);
+            }
         }
     }
 }
