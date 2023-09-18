@@ -1,6 +1,7 @@
 ﻿using Rws.MultiselectLanguageComboBox.Models;
 using Sdl.MultiSelectComboBox.API;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace Rws.MultiselectLanguageComboBox.Services
 {
     public class DefaultLanguageInfoService : ILanguageInfoService
     {
-        private LanguageItemGroup _group = new LanguageItemGroup(-1, "All");
+        private LanguageItemGroup _allGroup = new LanguageItemGroup(int.MaxValue, "All");
 
         public virtual string GetDisplayName(string language)
         {
@@ -21,7 +22,7 @@ namespace Rws.MultiselectLanguageComboBox.Services
 
         public virtual IItemGroup GetItemGroup(string language)
         {
-            return _group;
+            return _allGroup;
         }
 
         public virtual ImageSource GetImage(string language)

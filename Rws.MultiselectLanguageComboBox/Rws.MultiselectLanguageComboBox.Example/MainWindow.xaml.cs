@@ -18,6 +18,11 @@ namespace Rws.MultiselectLanguageComboBox.Example
             InitializeComponent();
 
             DataContext = this;
+
+            LanguageComboBox.LanguageInfoService = new CustomLanguageInfoService
+            {
+                RecentLanguages = new List<string> { "en-US", "en-GB" }
+            };
         }
 
         public ObservableCollection<string> AvailableLanguages { get; set; } = new ObservableCollection<string>(new[] { "en-US", "en-GB", "ro-RO" } );

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
@@ -64,6 +65,7 @@ namespace Rws.MultiselectLanguageComboBox
             set
             {
                 _languageInfoService = value;
+                Refresh();
             }
         }
 
@@ -92,15 +94,20 @@ namespace Rws.MultiselectLanguageComboBox
                 oldLanguagesSource.CollectionChanged -= LanguagesSource_CollectionChanged;
             }
 
-            _languageItemsMap.Clear();
-            var items = new ObservableCollection<LanguageItem>();
-            AddLanguageItems(items, LanguagesSource);
-            ItemsSource = items;
+            Refresh();
 
             if (LanguagesSource != null)
             {
                 LanguagesSource.CollectionChanged += LanguagesSource_CollectionChanged;
             }
+        }
+
+        public void Refresh()
+        {
+            _languageItemsMap.Clear();
+            var items = new ObservableCollection<LanguageItem>();
+            AddLanguageItems(items, LanguagesSource);
+            ItemsSource = items;
         }
 
         private void OnSelectedLanguagesChanged(ObservableCollection<string> oldSelectedLanguages)
@@ -302,9 +309,9 @@ namespace Rws.MultiselectLanguageComboBox
                 item = new LanguageItem
                 {
                     Id = language,
-                    Name = LanguageInfoService.GetDisplayName(language),
-                    Group = LanguageInfoService.GetItemGroup(language),
-                    ImageProvider = () => LanguageInfoService.GetImage(language)
+                    Name = LanguageInfoService?.GetDisplayName(language) ?? language,
+                    Group = LanguageInfoService?.GetItemGroup(language),
+                    ImageProvider = () => LanguageInfoService?.GetImage(language)
                 };
                 _languageItemsMap.Add(language, item);
             }
