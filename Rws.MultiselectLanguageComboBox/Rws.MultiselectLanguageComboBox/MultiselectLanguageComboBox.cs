@@ -118,6 +118,7 @@ namespace Rws.MultiselectLanguageComboBox
 
             var selectedItems = new ObservableCollection<LanguageItem>();
             AddLanguageItems(selectedItems, SelectedLanguages);
+            ResetSelectionOrder();
             SelectedItems = selectedItems;
 
             if (SelectedLanguages != null)
@@ -187,6 +188,8 @@ namespace Rws.MultiselectLanguageComboBox
                 }
             }
 
+            ResetSelectionOrder();
+
             _isDuringInternalSelectedLanuageSet = true;
             SelectedLanguage = SelectedLanguages.FirstOrDefault();
             _isDuringInternalSelectedLanuageSet = false;
@@ -207,6 +210,22 @@ namespace Rws.MultiselectLanguageComboBox
             {
                 SelectedLanguages.Add(SelectedLanguage);
             }
+        }
+
+        private void ResetSelectionOrder()
+        {
+            if (ItemsSource == null)
+                return;
+
+            foreach (LanguageItem item in ItemsSource)
+                item.SelectedOrder = -1;
+
+            if (SelectedItems == null)
+                return;
+
+            int order = 0;
+            foreach (LanguageItem item in SelectedItems)
+                item.SelectedOrder = ++order;
         }
 
         private void SelectedItems_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
