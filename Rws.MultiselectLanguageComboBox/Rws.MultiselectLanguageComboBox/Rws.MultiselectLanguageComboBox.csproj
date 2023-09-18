@@ -560,10 +560,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Multiselect-ComboBox\MultiSelectComboBox\Sdl.MultiSelectComboBox\Sdl.MultiSelectComboBox.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Images\aa-dj.ico" />
     <Resource Include="Images\aa-er.ico" />
     <Resource Include="Images\aa-et.ico" />

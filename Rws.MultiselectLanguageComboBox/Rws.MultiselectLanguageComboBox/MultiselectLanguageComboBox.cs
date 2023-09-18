@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
@@ -23,18 +22,32 @@ namespace Rws.MultiselectLanguageComboBox
             SetValue(SelectedLanguagesProperty, new ObservableCollection<string>());
         }
 
-        public static readonly DependencyProperty LanguagesSourceProperty = DependencyProperty.Register("LanguagesSource", typeof(ObservableCollection<string>), typeof(MultiselectLanguageComboBox), new PropertyMetadata(new PropertyChangedCallback(OnLanguagesSourceChanged)));
+        public static readonly DependencyProperty LanguagesSourceProperty = 
+            DependencyProperty.Register("LanguagesSource", typeof(ObservableCollection<string>), typeof(MultiselectLanguageComboBox), new FrameworkPropertyMetadata(new PropertyChangedCallback(OnLanguagesSourceChanged)));
+        
         public ObservableCollection<string> LanguagesSource
         {
             get { return (ObservableCollection<string>)GetValue(LanguagesSourceProperty); }
             set { SetValue(LanguagesSourceProperty, value); }
         }
 
-        public static readonly DependencyProperty SelectedLanguagesProperty = DependencyProperty.Register("SelectedLanguages", typeof(ObservableCollection<string>), typeof(MultiselectLanguageComboBox), new PropertyMetadata(new PropertyChangedCallback(OnSelectedLanguagesChanged)));
+        public static readonly DependencyProperty SelectedLanguagesProperty = 
+            DependencyProperty.Register("SelectedLanguages", typeof(ObservableCollection<string>), typeof(MultiselectLanguageComboBox), new FrameworkPropertyMetadata(new PropertyChangedCallback(OnSelectedLanguagesChanged)));
+        
         public ObservableCollection<string> SelectedLanguages
         {
             get { return (ObservableCollection<string>)GetValue(SelectedLanguagesProperty); }
             set { SetValue(SelectedLanguagesProperty, value); }
+        }
+
+        public static readonly DependencyProperty SelectedLanguageProperty =
+            DependencyProperty.Register("SelectedLanguage", typeof(string), typeof(MultiselectLanguageComboBox),
+                new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedLanguageChanged));
+
+        public string SelectedLanguage
+        {
+            get => (string)GetValue(SelectedLanguageProperty);
+            set => SetValue(SelectedLanguageProperty, value);
         }
 
         private ILanguageInfoService _languageInfoService;
@@ -64,6 +77,12 @@ namespace Rws.MultiselectLanguageComboBox
         {
             var component = d as MultiselectLanguageComboBox;
             component?.OnSelectedLanguagesChanged(e.OldValue as ObservableCollection<string>);
+        }
+
+        private static void OnSelectedLanguageChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var component = d as MultiselectLanguageComboBox;
+            component?.OnSelectedLanguageChanged();
         }
 
         private void OnLanguagesSourceChanged(ObservableCollection<string> oldLanguagesSource)
@@ -110,6 +129,10 @@ namespace Rws.MultiselectLanguageComboBox
             {
                 selectedItems.CollectionChanged += SelectedItems_CollectionChanged;
             }
+
+            _isDuringInternalSelectedLanuageSet = true;
+            SelectedLanguage = SelectedLanguages?.FirstOrDefault();
+            _isDuringInternalSelectedLanuageSet = false;
         }
 
         private void LanguagesSource_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -162,6 +185,27 @@ namespace Rws.MultiselectLanguageComboBox
                 {
                     RemoveLanguageItem(selectedItems, language);
                 }
+            }
+
+            _isDuringInternalSelectedLanuageSet = true;
+            SelectedLanguage = SelectedLanguages.FirstOrDefault();
+            _isDuringInternalSelectedLanuageSet = false;
+        }
+
+        private bool _isDuringInternalSelectedLanuageSet;
+
+        private void OnSelectedLanguageChanged()
+        {
+            if (_isDuringInternalSelectedLanuageSet)
+            {
+                return;
+            }
+
+            SelectedLanguages.Clear();
+            
+            if (SelectedLanguage != null)
+            {
+                SelectedLanguages.Add(SelectedLanguage);
             }
         }
 
