@@ -3,16 +3,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:Rws.MultiselectLanguageComboBox"
     xmlns:models="clr-namespace:Rws.MultiselectLanguageComboBox.Models"
-    xmlns:conv="clr-namespace:Rws.MultiselectLanguageComboBox.Converters"
     xmlns:sdl="http://schemas.sdl.com/xaml">
 
-    <conv:ImageConverter x:Key="ImageConverter"/>
     <Style TargetType="{x:Type local:MultiselectLanguageComboBox}" BasedOn="{StaticResource {x:Type sdl:MultiSelectComboBox}}">
         <Setter Property="SelectedItemTemplate">
             <Setter.Value>
                 <DataTemplate DataType="models:LanguageItem">
                     <StackPanel Orientation="Horizontal" Margin="0,-4">
-                        <Image Margin="2,1,2,-2" Source="{Binding ImageUri, Converter={StaticResource ImageConverter}}" Width="24" Height="24" VerticalAlignment="Center"/>
+                        <Image Margin="2,1,2,-2" Source="{Binding Image}" Width="24" Height="24" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding Name}" Margin="2,0" VerticalAlignment="Center"/>
                     </StackPanel>
                 </DataTemplate>
@@ -27,7 +25,7 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="30"/>
                         </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0" Source="{Binding ImageUri, Converter={StaticResource ImageConverter}}" Margin="2" Width="24" Height="24" VerticalAlignment="Center"/>
+                        <Image Grid.Column="0" Source="{Binding Image}" Margin="2" Width="24" Height="24" VerticalAlignment="Center"/>
                         <TextBlock Grid.Column="1" Text="{Binding Name}" Margin="2,0" VerticalAlignment="Center"/>
                         <TextBlock Grid.Column="2" Text="{Binding SelectedOrder}" Margin="5,0" VerticalAlignment="Center" HorizontalAlignment="Center">
                             <TextBlock.Style>

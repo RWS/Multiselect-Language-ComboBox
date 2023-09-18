@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
@@ -221,7 +221,7 @@ namespace Rws.MultiselectLanguageComboBox
                     Id = language,
                     Name = LanguageInfoService.GetDisplayName(language),
                     Group = LanguageInfoService.GetItemGroup(language),
-                    ImageUri = new Uri($"pack://application:,,,/Rws.MultiselectLanguageComboBox;component/Images/{language}.ico"),
+                    ImageProvider = () => LanguageInfoService.GetImage(language)
                 };
                 _languageItemsMap.Add(language, item);
             }

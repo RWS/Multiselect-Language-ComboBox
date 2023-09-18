@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Globalization;
 using System.Runtime.CompilerServices;
+using System.Windows.Media;
 using Sdl.MultiSelectComboBox.API;
 
 namespace Rws.MultiselectLanguageComboBox.Models
@@ -12,7 +13,7 @@ namespace Rws.MultiselectLanguageComboBox.Models
         private bool _isEnabled;
         private int _selectedOrder;
         private IItemGroup _group;
-        private Uri _imageUri;
+        private ImageSource _image;
 
         public LanguageItem()
         {
@@ -103,17 +104,18 @@ namespace Rws.MultiselectLanguageComboBox.Models
             }
         }
 
+        public Func<ImageSource> ImageProvider { get; set; }
+
         /// <summary>
-        /// The item's ImageUri.
-        /// 
+        /// The item's Image.
         /// </summary>
-        public Uri ImageUri
+        public ImageSource Image
         {
-            get => _imageUri;
+            get => _image ?? (_image = ImageProvider());
             set
             {
-                _imageUri = value;
-                OnPropertyChanged(nameof(ImageUri));
+                _image = value;
+                OnPropertyChanged(nameof(Image));
             }
         }
 
