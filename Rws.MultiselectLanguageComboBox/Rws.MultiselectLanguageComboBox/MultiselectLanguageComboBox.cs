@@ -215,37 +215,57 @@ namespace Rws.MultiselectLanguageComboBox
         private void ResetSelectionOrder()
         {
             if (ItemsSource == null)
+            {
                 return;
+            }
 
-            foreach (LanguageItem item in ItemsSource)
-                item.SelectedOrder = -1;
+            foreach (var item in ItemsSource)
+            {
+                if (item is LanguageItem languageItem)
+                {
+                    languageItem.SelectedOrder = -1;
+                }
+            }
 
             if (SelectedItems == null)
+            {
                 return;
+            }
 
             int order = 0;
-            foreach (LanguageItem item in SelectedItems)
-                item.SelectedOrder = ++order;
+            foreach (var item in SelectedItems)
+            {
+                if (item is LanguageItem languageItem)
+                {
+                    languageItem.SelectedOrder = ++order;
+                }
+            }
         }
 
         private void SelectedItems_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Add)
             {
-                foreach (LanguageItem item in e.NewItems)
+                foreach (var item in e.NewItems)
                 {
-                    if (!SelectedLanguages.Contains(item.Id))
+                    if (item is LanguageItem languageItem)
                     {
-                        SelectedLanguages.Add(item.Id);
+                        if (!SelectedLanguages.Contains(languageItem.Id))
+                        {
+                            SelectedLanguages.Add(languageItem.Id);
+                        }
                     }
                 }
             }
 
             if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Remove)
             {
-                foreach (LanguageItem item in e.OldItems)
+                foreach (var item in e.OldItems)
                 {
-                    SelectedLanguages.Remove(item.Id);
+                    if (item is LanguageItem languageItem)
+                    {
+                        SelectedLanguages.Remove(languageItem.Id);
+                    }
                 }
             }
         }
