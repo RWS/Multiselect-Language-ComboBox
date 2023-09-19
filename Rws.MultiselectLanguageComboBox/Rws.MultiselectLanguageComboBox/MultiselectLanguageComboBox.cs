@@ -279,6 +279,17 @@ namespace Rws.MultiselectLanguageComboBox
 
         private Dictionary<string, LanguageItem> _languageItemsMap = new Dictionary<string, LanguageItem>();
 
+        public LanguageItem GetLanguageItem(string language)
+        {
+            LanguageItem item;
+            if (_languageItemsMap.TryGetValue(language, out item))
+            {
+                return item;
+            }
+
+            return null;
+        }
+
         private void AddLanguageItems(ObservableCollection<LanguageItem> items, ObservableCollection<string> languages)
         {
             if (languages == null)
