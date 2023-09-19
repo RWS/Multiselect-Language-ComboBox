@@ -3,7 +3,7 @@ using Rws.MultiselectLanguageComboBox.Services;
 using Sdl.MultiSelectComboBox.API;
 using System.Collections.Generic;
 
-namespace Rws.MultiselectLanguageComboBox.Example
+namespace Rws.MultiselectLanguageComboBox.Example.Services
 {
     public class CustomLanguageInfoService : DefaultLanguageInfoService
     {

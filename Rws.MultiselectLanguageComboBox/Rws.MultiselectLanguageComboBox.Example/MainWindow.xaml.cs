@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Rws.MultiselectLanguageComboBox.Example.Services;
+using Rws.MultiselectLanguageComboBox.Models;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 
@@ -19,6 +21,11 @@ namespace Rws.MultiselectLanguageComboBox.Example
             {
                 RecentLanguages = new List<string> { "en-US", "en-GB" }
             };
+
+            var languageItems = new List<LanguageItem>(LanguageComboBox.ItemsSource as ICollection<LanguageItem>);
+            var items = new ObservableCollection<LanguageItem>();
+            LanguageComboBox.ItemsSource = items;
+            LanguageComboBox.SuggestionProvider = new CustomSuggestionProvider(items, languageItems);
         }
 
         public ObservableCollection<string> AvailableLanguages { get; set; } = new ObservableCollection<string>(new[] { "en-US", "en-GB", "ro-RO" } );

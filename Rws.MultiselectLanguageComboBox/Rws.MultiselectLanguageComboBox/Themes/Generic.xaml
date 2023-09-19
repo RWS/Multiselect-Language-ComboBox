@@ -10,7 +10,7 @@
             <Setter.Value>
                 <DataTemplate DataType="models:LanguageItem">
                     <StackPanel Orientation="Horizontal">
-                        <Image Margin="2,-2,2,-4" Source="{Binding Image}" Height="24" VerticalAlignment="Center"/>
+                        <Image Margin="2,-3,2,-6" Source="{Binding Image}" Height="24" VerticalAlignment="Center"/>
                         <TextBlock Text="{Binding Name}" Margin="2,0" VerticalAlignment="Center"/>
                     </StackPanel>
                 </DataTemplate>

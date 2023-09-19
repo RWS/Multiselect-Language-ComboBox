@@ -52,7 +52,8 @@ namespace Rws.MultiselectLanguageComboBox.Services
                         FlowDirection.LeftToRight,
                         new Typeface(Fonts.SystemTypefaces.First().FaceNames.First().Value),
                         11,
-                        Brushes.Black);
+                        Brushes.Black, 
+                        1.5);
 
                     // Calculate the position to center the text in the rectangle
                     Point textPosition = new Point((width - label.Width) / 2, (height - label.Height) / 2);
