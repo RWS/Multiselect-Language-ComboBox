@@ -23,7 +23,6 @@ namespace Rws.MultiselectLanguageComboBox.Example
             };
 
             LanguageComboBox.SuggestionProvider = new CustomSuggestionProvider(
-                new ObservableCollection<LanguageItem>(), 
                 new List<LanguageItem>(LanguageComboBox.ItemsSource as ICollection<LanguageItem>));
         }
 

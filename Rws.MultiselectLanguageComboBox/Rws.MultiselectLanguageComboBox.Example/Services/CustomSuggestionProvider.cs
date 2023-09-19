@@ -15,12 +15,11 @@ namespace Rws.MultiselectLanguageComboBox.Example.Services
         private string _criteria = string.Empty;
         private int _skipCount;
 
-        private readonly ObservableCollection<LanguageItem> _observableCollection;
+        private readonly ObservableCollection<LanguageItem> _observableCollection = new ObservableCollection<LanguageItem>();
         private readonly List<LanguageItem> _source;
 
-        public CustomSuggestionProvider(ObservableCollection<LanguageItem> observableCollection, List<LanguageItem> source)
+        public CustomSuggestionProvider(List<LanguageItem> source)
         {
-            _observableCollection = observableCollection;
             _source = source;
         }
 
