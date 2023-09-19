@@ -46,7 +46,7 @@ namespace Rws.MultiselectLanguageComboBox.Services
                 using (DrawingContext drawingContext = drawingVisual.RenderOpen())
                 {
                     // Create a formatted text object
-                    FormattedText text = new FormattedText(
+                    FormattedText label = new FormattedText(
                         language.Substring(0, 2).ToUpperInvariant(),
                         CultureInfo.CurrentCulture,
                         FlowDirection.LeftToRight,
@@ -55,11 +55,11 @@ namespace Rws.MultiselectLanguageComboBox.Services
                         Brushes.Black);
 
                     // Calculate the position to center the text in the rectangle
-                    Point textPosition = new Point((width - text.Width) / 2, (height - text.Height) / 2);
+                    Point textPosition = new Point((width - label.Width) / 2, (height - label.Height) / 2);
 
                     // Create a rectangle and draw the text
-                    drawingContext.DrawRectangle(Brushes.White, new Pen(Brushes.Gray, 1), new Rect(0, 0, width-0.5, height-0.5));
-                    drawingContext.DrawText(text, textPosition);
+                    drawingContext.DrawRectangle(Brushes.White, new Pen(Brushes.Gray, 1), new Rect(0.5, 3.5, width-1.5, height-7));
+                    drawingContext.DrawText(label, textPosition);
                 }
 
                 // Render the DrawingVisual to a BitmapImage
