@@ -22,10 +22,9 @@ namespace Rws.MultiselectLanguageComboBox.Example
                 RecentLanguages = new List<string> { "en-US", "en-GB" }
             };
 
-            var languageItems = new List<LanguageItem>(LanguageComboBox.ItemsSource as ICollection<LanguageItem>);
-            var items = new ObservableCollection<LanguageItem>();
-            LanguageComboBox.ItemsSource = items;
-            LanguageComboBox.SuggestionProvider = new CustomSuggestionProvider(items, languageItems);
+            LanguageComboBox.SuggestionProvider = new CustomSuggestionProvider(
+                new ObservableCollection<LanguageItem>(), 
+                new List<LanguageItem>(LanguageComboBox.ItemsSource as ICollection<LanguageItem>));
         }
 
         public ObservableCollection<string> AvailableLanguages { get; set; } = new ObservableCollection<string>(new[] { "en-US", "en-GB", "ro-RO" } );
