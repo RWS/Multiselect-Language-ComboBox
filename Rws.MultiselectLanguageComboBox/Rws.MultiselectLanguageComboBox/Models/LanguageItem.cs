@@ -23,11 +23,6 @@ namespace Rws.MultiselectLanguageComboBox.Models
 
         public string Id { get; set; }
 
-        /// <summary>
-        /// The item name.
-        /// 
-        /// The filter criteria is applied on this property when using the default filter service.
-        /// </summary>
         public string Name
         {
             get => _name;
@@ -106,9 +101,6 @@ namespace Rws.MultiselectLanguageComboBox.Models
 
         public Func<ImageSource> ImageProvider { get; set; }
 
-        /// <summary>
-        /// The item's Image.
-        /// </summary>
         public ImageSource Image
         {
             get => _image ?? (_image = ImageProvider());

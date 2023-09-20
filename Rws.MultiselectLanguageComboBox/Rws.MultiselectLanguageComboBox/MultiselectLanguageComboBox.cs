@@ -9,8 +9,20 @@ using Sdl.MultiSelectComboBox.Themes.Generic;
 
 namespace Rws.MultiselectLanguageComboBox
 {
+    /// <summary>
+    /// Specialized MultiSelectComboBox component that shows and allows the end user to select from a set of languages.
+    /// By default, the list of languages is determined from the system (specific <see cref="CultureInfo"/> objects, ordered by their English name.)
+    /// You can override available languages by defining <see cref="LanguagesSource"/>, indicating strings that represent language IDs (not limited to ISO names).
+    /// <see cref="SelectedLanguages"/> provides support for language multi-selection, specifying and allowing reading which languages are currently selected (their string IDs).
+    /// If you use single selection (using <see cref="MultiSelectComboBox.SelectionMode"/> property, you can also use the shortcut single selection property <see cref="SelectedLanguage"/>, instead.
+    /// </summary>
     public class MultiselectLanguageComboBox : MultiSelectComboBox
     {
+        private ILanguageInfoService _languageInfoService;
+        
+        private Dictionary<string, LanguageItem> _languageItemsMap = new Dictionary<string, LanguageItem>();
+        private bool _isDuringInternalSelectedLanuageSet;
+
         static MultiselectLanguageComboBox()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MultiselectLanguageComboBox), new FrameworkPropertyMetadata(typeof(MultiselectLanguageComboBox)));
@@ -23,34 +35,69 @@ namespace Rws.MultiselectLanguageComboBox
         }
 
         public static readonly DependencyProperty LanguagesSourceProperty = 
-            DependencyProperty.Register("LanguagesSource", typeof(ObservableCollection<string>), typeof(MultiselectLanguageComboBox), new FrameworkPropertyMetadata(new PropertyChangedCallback(OnLanguagesSourceChanged)));
+            DependencyProperty.Register("LanguagesSource", typeof(ObservableCollection<string>), typeof(MultiselectLanguageComboBox), 
+                new FrameworkPropertyMetadata(new PropertyChangedCallback(OnLanguagesSourceChanged)));
         
+        /// <summary>
+        /// Specifies the list of available languages, as a collection of string IDs.
+        /// </summary>
         public ObservableCollection<string> LanguagesSource
         {
-            get { return (ObservableCollection<string>)GetValue(LanguagesSourceProperty); }
-            set { SetValue(LanguagesSourceProperty, value); }
+            get => (ObservableCollection<string>)GetValue(LanguagesSourceProperty);
+            set => SetValue(LanguagesSourceProperty, value);
+        }
+
+        private static void OnLanguagesSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var component = d as MultiselectLanguageComboBox;
+            component?.OnLanguagesSourceChanged(e.OldValue as ObservableCollection<string>);
         }
 
         public static readonly DependencyProperty SelectedLanguagesProperty = 
-            DependencyProperty.Register("SelectedLanguages", typeof(ObservableCollection<string>), typeof(MultiselectLanguageComboBox), new FrameworkPropertyMetadata(new PropertyChangedCallback(OnSelectedLanguagesChanged)));
-        
+            DependencyProperty.Register("SelectedLanguages", typeof(ObservableCollection<string>), typeof(MultiselectLanguageComboBox), 
+                new FrameworkPropertyMetadata(new PropertyChangedCallback(OnSelectedLanguagesChanged)));
+
+        /// <summary>
+        /// Gets or sets the list of selected languages in the user interface (among languages available in <see cref="LanguagesSource"/>), as a collection of string IDs.
+        /// </summary>
         public ObservableCollection<string> SelectedLanguages
         {
-            get { return (ObservableCollection<string>)GetValue(SelectedLanguagesProperty); }
-            set { SetValue(SelectedLanguagesProperty, value); }
+            get => (ObservableCollection<string>)GetValue(SelectedLanguagesProperty);
+            set => SetValue(SelectedLanguagesProperty, value);
+        }
+
+        private static void OnSelectedLanguagesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var component = d as MultiselectLanguageComboBox;
+            component?.OnSelectedLanguagesChanged(e.OldValue as ObservableCollection<string>);
         }
 
         public static readonly DependencyProperty SelectedLanguageProperty =
             DependencyProperty.Register("SelectedLanguage", typeof(string), typeof(MultiselectLanguageComboBox),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedLanguageChanged));
 
+        /// <summary>
+        /// Gets or sets a single selected languages (among languages available in <see cref="LanguagesSource"/>), as a string IDs.
+        /// If multiple languages are selected, the first selected item's ID is returned.
+        /// </summary>
         public string SelectedLanguage
         {
             get => (string)GetValue(SelectedLanguageProperty);
             set => SetValue(SelectedLanguageProperty, value);
         }
 
-        private ILanguageInfoService _languageInfoService;
+        private static void OnSelectedLanguageChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var component = d as MultiselectLanguageComboBox;
+            component?.OnSelectedLanguageChanged();
+        }
+
+        /// <summary>
+        /// Defines the service that provides information about languages, based on their IDs, including their names, groups, and images to be used as icons (flags).
+        /// By default English names are returned, retreived using <see cref="CultureInfo"/>,
+        /// all items are in a single group ("All"), and images are returned from an internal collection of language ID-based icons
+        /// that correspond to known cultures, or else icons are generated on the fly displaying two letters from the language ID.
+        /// </summary>
         public ILanguageInfoService LanguageInfoService
         {
             get
@@ -68,22 +115,37 @@ namespace Rws.MultiselectLanguageComboBox
             }
         }
 
-        private static void OnLanguagesSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        /// <summary>
+        /// Returns the internal <see cref="LanguageItem"/> object generated for any specific language.
+        /// Internally, the component creates these internal objects to be presented in the user interface.
+        /// You may need such object instances yourself too if you plan to further customize the component instance,
+        /// such as during implementing a custom suggestion provider, or filtering and other services that 
+        /// would work directly on the base <see cref="MultiSelectComboBox"/>.
+        /// </summary>
+        /// <param name="language">The string ID of the language to get the <see cref="LanguageItem"/> for.</param>
+        /// <returns>Returns the <see cref="LanguageItem"/> for the specified language ID, if it was already created (and is now cached) by the component, or otherwise it creates (and cashes) it first.</returns>
+        public LanguageItem GetLanguageItem(string language)
         {
-            var component = d as MultiselectLanguageComboBox;
-            component?.OnLanguagesSourceChanged(e.OldValue as ObservableCollection<string>);
+            LanguageItem item;
+            if (_languageItemsMap.TryGetValue(language, out item))
+            {
+                return item;
+            }
+
+            return null;
         }
 
-        private static void OnSelectedLanguagesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        /// <summary>
+        /// Refreshes the entire user interface of the component, recreating all internal language items.
+        /// Might be useful in case <see cref="LanguageInfoService"/> would return other values for the same language IDs,
+        /// and the cached <see cref="LanguageItem"/> objects do not reflect the reality anymore.
+        /// </summary>
+        public void Refresh()
         {
-            var component = d as MultiselectLanguageComboBox;
-            component?.OnSelectedLanguagesChanged(e.OldValue as ObservableCollection<string>);
-        }
-
-        private static void OnSelectedLanguageChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-        {
-            var component = d as MultiselectLanguageComboBox;
-            component?.OnSelectedLanguageChanged();
+            _languageItemsMap.Clear();
+            var items = new ObservableCollection<LanguageItem>();
+            AddLanguageItems(items, LanguagesSource);
+            ItemsSource = items;
         }
 
         private void OnLanguagesSourceChanged(ObservableCollection<string> oldLanguagesSource)
@@ -99,14 +161,6 @@ namespace Rws.MultiselectLanguageComboBox
             {
                 LanguagesSource.CollectionChanged += LanguagesSource_CollectionChanged;
             }
-        }
-
-        public void Refresh()
-        {
-            _languageItemsMap.Clear();
-            var items = new ObservableCollection<LanguageItem>();
-            AddLanguageItems(items, LanguagesSource);
-            ItemsSource = items;
         }
 
         private void OnSelectedLanguagesChanged(ObservableCollection<string> oldSelectedLanguages)
@@ -201,8 +255,6 @@ namespace Rws.MultiselectLanguageComboBox
             _isDuringInternalSelectedLanuageSet = false;
         }
 
-        private bool _isDuringInternalSelectedLanuageSet;
-
         private void OnSelectedLanguageChanged()
         {
             if (_isDuringInternalSelectedLanuageSet)
@@ -215,36 +267,6 @@ namespace Rws.MultiselectLanguageComboBox
             if (SelectedLanguage != null)
             {
                 SelectedLanguages.Add(SelectedLanguage);
-            }
-        }
-
-        private void ResetSelectionOrder()
-        {
-            if (ItemsSource == null)
-            {
-                return;
-            }
-
-            foreach (var item in ItemsSource)
-            {
-                if (item is LanguageItem languageItem)
-                {
-                    languageItem.SelectedOrder = -1;
-                }
-            }
-
-            if (SelectedItems == null)
-            {
-                return;
-            }
-
-            int order = 0;
-            foreach (var item in SelectedItems)
-            {
-                if (item is LanguageItem languageItem)
-                {
-                    languageItem.SelectedOrder = ++order;
-                }
             }
         }
 
@@ -276,17 +298,34 @@ namespace Rws.MultiselectLanguageComboBox
             }
         }
 
-        private Dictionary<string, LanguageItem> _languageItemsMap = new Dictionary<string, LanguageItem>();
-
-        public LanguageItem GetLanguageItem(string language)
+        private void ResetSelectionOrder()
         {
-            LanguageItem item;
-            if (_languageItemsMap.TryGetValue(language, out item))
+            if (ItemsSource == null)
             {
-                return item;
+                return;
             }
 
-            return null;
+            foreach (var item in ItemsSource)
+            {
+                if (item is LanguageItem languageItem)
+                {
+                    languageItem.SelectedOrder = -1;
+                }
+            }
+
+            if (SelectedItems == null)
+            {
+                return;
+            }
+
+            int order = 0;
+            foreach (var item in SelectedItems)
+            {
+                if (item is LanguageItem languageItem)
+                {
+                    languageItem.SelectedOrder = ++order;
+                }
+            }
         }
 
         private void AddLanguageItems(ObservableCollection<LanguageItem> items, ObservableCollection<string> languages)
