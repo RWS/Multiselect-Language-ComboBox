@@ -12,7 +12,8 @@ namespace Rws.MultiselectLanguageComboBox.Services
 {
     public class DefaultLanguageInfoService : ILanguageInfoService
     {
-        private LanguageItemGroup _allGroup = new LanguageItemGroup(int.MaxValue, "All");
+        private readonly LanguageItemGroup _allGroup = new LanguageItemGroup(int.MaxValue, "All");
+        private readonly ResourceDictionary _resources = new ResourceDictionary { Source = new Uri("pack://application:,,,/Rws.MultiselectLanguageComboBox;component/Resources/Images.xaml", UriKind.Absolute) };
 
         public virtual string GetDisplayName(string language)
         {
@@ -28,9 +29,9 @@ namespace Rws.MultiselectLanguageComboBox.Services
         {
             try
             {
-                var bitmapImage = new BitmapImage(new Uri($"pack://application:,,,/Rws.MultiselectLanguageComboBox;component/Images/{language}.ico"));
-                bitmapImage.Freeze();
-                return bitmapImage;
+                var image = _resources[$"{language.ToLowerInvariant()}"] as DrawingImage;
+                image.Freeze();
+                return image;
             }
             catch (IOException) // When an image isn't present, we manually draw a string instead.
             {

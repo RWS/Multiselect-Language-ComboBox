@@ -7,7 +7,7 @@ namespace Rws.MultiselectLanguageComboBox.Example.Services
 {
     public class CustomLanguageInfoService : DefaultLanguageInfoService
     {
-        private LanguageItemGroup _recentGroup = new LanguageItemGroup(0, "Recently used");
+        private readonly LanguageItemGroup _recentGroup = new LanguageItemGroup(0, "Recently used");
 
         public override IItemGroup GetItemGroup(string language)
         {

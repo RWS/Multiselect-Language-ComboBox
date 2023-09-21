@@ -1,0 +1,87 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DrawingImage x:Key="en-gb">
+        <DrawingImage.Drawing>
+            <DrawingGroup>
+                <GeometryDrawing Geometry="M0 0V12H16V0H0Z" Brush="#FF012169"/>
+                <GeometryDrawing Geometry="M0 0L16 12L0 0ZM16 0L0 12L16 0Z" Brush="#000000"/>
+                <GeometryDrawing Geometry="M6.21125 6L-0.357666 1.07331L0.357876 -1.07331L8.0001 4.65836L15.6423 -1.07331L16.3579 1.07331L9.78896 6L16.3579 10.9267L15.6423 13.0733L8.0001 7.34164L0.357876 13.0733L-0.357666 10.9267L6.21125 6Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M0 0L16 12L0 0ZM16 0L0 12L16 0Z" Brush="#000000"/>
+                <GeometryDrawing Geometry="M6.80742 6L-0.238525 0.715545L0.238502 -0.715538L7.99999 5.10558L15.7615 -0.715538L16.2385 0.715545L9.19256 6L16.2385 11.2845L15.7615 12.7155L7.99999 6.89443L0.238502 12.7155L-0.238525 11.2845L6.80742 6Z" Brush="#FFC8102E"/>
+                <GeometryDrawing Geometry="M8 0V12V0ZM0 6H16H0Z" Brush="#000000"/>
+                <GeometryDrawing Geometry="M9.33333 8V12H6.66667V8H0V4H6.66667V0H9.33333V4H16V8H9.33333Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M8 0V12V0ZM0 6H16H0Z" Brush="#000000"/>
+                <GeometryDrawing Geometry="M8.8 7.2V12H7.2V7.2H0V4.8H7.2V0H8.8V4.8H16V7.2H8.8Z" Brush="#FFC8102E"/>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+    <DrawingImage x:Key="en-us">
+        <DrawingImage.Drawing>
+            <DrawingGroup>
+                <GeometryDrawing Geometry="M16 0H0V12H16V0Z" Brush="#FFB22234"/>
+                <GeometryDrawing Geometry="M0 1.38461H16ZM16 3.23077H0ZM0 5.07692H16ZM16 6.92307H0ZM0 8.76923H16ZM16 10.6154H0Z" Brush="#000000"/>
+                <GeometryDrawing Geometry="M16 1.84616H0V0.92308H16V1.84616ZM0 2.76923H16V3.69231H0V2.76923ZM16 5.53847H0V4.61539H16V5.53847ZM0 6.46154H16V7.38462H0V6.46154ZM16 9.23077H0V8.3077H16V9.23077ZM0 10.1538H16V11.0769H0V10.1538Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M6.4 0H0V6.46154H6.4V0Z" Brush="#FF3C3B6E"/>
+                <GeometryDrawing Geometry="M0.533293 0.276924L0.685594 0.944869L0.286865 0.532056H0.77972L0.380992 0.944869L0.533293 0.276924Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M0.533293 1.56923L0.685594 2.23717L0.286865 1.82436H0.77972L0.380992 2.23717L0.533293 1.56923Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M0.533293 2.86154L0.685594 3.52949L0.286865 3.11667H0.77972L0.380992 3.52949L0.533293 2.86154Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M0.533293 4.15385L0.685594 4.82179L0.286865 4.40898H0.77972L0.380992 4.82179L0.533293 4.15385Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M0.533293 5.44615L0.685594 6.1141L0.286865 5.70128H0.77972L0.380992 6.1141L0.533293 5.44615Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M1.06674 0.92308L1.21904 1.59103L0.820312 1.17821H1.31317L0.914439 1.59103L1.06674 0.92308Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M1.06674 2.21539L1.21904 2.88333L0.820312 2.47052H1.31317L0.914439 2.88333L1.06674 2.21539Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M1.06674 3.5077L1.21904 4.17564L0.820312 3.76283H1.31317L0.914439 4.17564L1.06674 3.5077Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M1.06674 4.8L1.21904 5.46795L0.820312 5.05514H1.31317L0.914439 5.46795L1.06674 4.8Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M1.59994 0.276924L1.75224 0.944869L1.35352 0.532056H1.84637L1.44764 0.944869L1.59994 0.276924Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M1.59994 1.56923L1.75224 2.23717L1.35352 1.82436H1.84637L1.44764 2.23717L1.59994 1.56923Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M1.59994 2.86154L1.75224 3.52949L1.35352 3.11667H1.84637L1.44764 3.52949L1.59994 2.86154Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M1.59994 4.15385L1.75224 4.82179L1.35352 4.40898H1.84637L1.44764 4.82179L1.59994 4.15385Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M1.59994 5.44615L1.75224 6.1141L1.35352 5.70128H1.84637L1.44764 6.1141L1.59994 5.44615Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M2.13339 0.92308L2.28569 1.59103L1.88696 1.17821H2.37982L1.98109 1.59103L2.13339 0.92308Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M2.13339 2.21539L2.28569 2.88333L1.88696 2.47052H2.37982L1.98109 2.88333L2.13339 2.21539Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M2.13339 3.5077L2.28569 4.17564L1.88696 3.76283H2.37982L1.98109 4.17564L2.13339 3.5077Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M2.13339 4.8L2.28569 5.46795L1.88696 5.05514H2.37982L1.98109 5.46795L2.13339 4.8Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M2.66659 0.276924L2.81889 0.944869L2.42017 0.532056H2.91302L2.51429 0.944869L2.66659 0.276924Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M2.66659 1.56923L2.81889 2.23717L2.42017 1.82436H2.91302L2.51429 2.23717L2.66659 1.56923Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M2.66659 2.86154L2.81889 3.52949L2.42017 3.11667H2.91302L2.51429 3.52949L2.66659 2.86154Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M2.66659 4.15385L2.81889 4.82179L2.42017 4.40898H2.91302L2.51429 4.82179L2.66659 4.15385Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M2.66659 5.44615L2.81889 6.1141L2.42017 5.70128H2.91302L2.51429 6.1141L2.66659 5.44615Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M3.20004 0.92308L3.35234 1.59103L2.95361 1.17821H3.44647L3.04774 1.59103L3.20004 0.92308Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M3.20004 2.21539L3.35234 2.88333L2.95361 2.47052H3.44647L3.04774 2.88333L3.20004 2.21539Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M3.20004 3.5077L3.35234 4.17564L2.95361 3.76283H3.44647L3.04774 4.17564L3.20004 3.5077Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M3.20004 4.8L3.35234 5.46795L2.95361 5.05514H3.44647L3.04774 5.46795L3.20004 4.8Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M3.73324 0.276924L3.88554 0.944869L3.48682 0.532056H3.97967L3.58094 0.944869L3.73324 0.276924Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M3.73324 1.56923L3.88554 2.23717L3.48682 1.82436H3.97967L3.58094 2.23717L3.73324 1.56923Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M3.73324 2.86154L3.88554 3.52949L3.48682 3.11667H3.97967L3.58094 3.52949L3.73324 2.86154Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M3.73324 4.15385L3.88554 4.82179L3.48682 4.40898H3.97967L3.58094 4.82179L3.73324 4.15385Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M3.73324 5.44615L3.88554 6.1141L3.48682 5.70128H3.97967L3.58094 6.1141L3.73324 5.44615Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M4.26669 0.92308L4.41899 1.59103L4.02026 1.17821H4.51312L4.11439 1.59103L4.26669 0.92308Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M4.26669 2.21539L4.41899 2.88333L4.02026 2.47052H4.51312L4.11439 2.88333L4.26669 2.21539Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M4.26669 3.5077L4.41899 4.17564L4.02026 3.76283H4.51312L4.11439 4.17564L4.26669 3.5077Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M4.26669 4.8L4.41899 5.46795L4.02026 5.05514H4.51312L4.11439 5.46795L4.26669 4.8Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M4.79989 0.276924L4.9522 0.944869L4.55347 0.532056H5.04632L4.64759 0.944869L4.79989 0.276924Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M4.79989 1.56923L4.9522 2.23717L4.55347 1.82436H5.04632L4.64759 2.23717L4.79989 1.56923Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M4.79989 2.86154L4.9522 3.52949L4.55347 3.11667H5.04632L4.64759 3.52949L4.79989 2.86154Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M4.79989 4.15385L4.9522 4.82179L4.55347 4.40898H5.04632L4.64759 4.82179L4.79989 4.15385Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M4.79989 5.44615L4.9522 6.1141L4.55347 5.70128H5.04632L4.64759 6.1141L4.79989 5.44615Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M5.33334 0.92308L5.48564 1.59103L5.08691 1.17821H5.57977L5.18104 1.59103L5.33334 0.92308Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M5.33334 2.21539L5.48564 2.88333L5.08691 2.47052H5.57977L5.18104 2.88333L5.33334 2.21539Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M5.33334 3.5077L5.48564 4.17564L5.08691 3.76283H5.57977L5.18104 4.17564L5.33334 3.5077Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M5.33334 4.8L5.48564 5.46795L5.08691 5.05514H5.57977L5.18104 5.46795L5.33334 4.8Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M5.86654 0.276924L6.01885 0.944869L5.62012 0.532056H6.11297L5.71424 0.944869L5.86654 0.276924Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M5.86654 1.56923L6.01885 2.23717L5.62012 1.82436H6.11297L5.71424 2.23717L5.86654 1.56923Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M5.86654 2.86154L6.01885 3.52949L5.62012 3.11667H6.11297L5.71424 3.52949L5.86654 2.86154Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M5.86654 4.15385L6.01885 4.82179L5.62012 4.40898H6.11297L5.71424 4.82179L5.86654 4.15385Z" Brush="#ffffff"/>
+                <GeometryDrawing Geometry="M5.86654 5.44615L6.01885 6.1141L5.62012 5.70128H6.11297L5.71424 6.1141L5.86654 5.44615Z" Brush="#ffffff"/>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+    <DrawingImage x:Key="ro-ro">
+        <DrawingImage.Drawing>
+            <DrawingGroup>
+                <GeometryDrawing Geometry="M16 0H0V12H16V0Z" Brush="#FF002B7F"/>
+                <GeometryDrawing Geometry="M15.9999 0H5.33325V12H15.9999V0Z" Brush="#FFFCD116"/>
+                <GeometryDrawing Geometry="M16.0001 0H10.6667V12H16.0001V0Z" Brush="#FFCE1126"/>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+</ResourceDictionary>
