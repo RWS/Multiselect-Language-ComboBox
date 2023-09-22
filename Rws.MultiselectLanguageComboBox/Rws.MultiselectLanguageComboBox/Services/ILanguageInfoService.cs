@@ -1,7 +1,7 @@
 ﻿using Sdl.MultiSelectComboBox.API;
 using System.Windows.Media;
 
-namespace Rws.MultiselectLanguageComboBox.Services
+namespace Rws.MultiSelectLanguageComboBox.Services
 {
 	public interface ILanguageInfoService
 	{

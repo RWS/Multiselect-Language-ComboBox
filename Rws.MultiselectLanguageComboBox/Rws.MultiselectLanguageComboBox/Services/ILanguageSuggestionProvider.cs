@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Threading;
 
-namespace Rws.MultiselectLanguageComboBox.Services
+namespace Rws.MultiSelectLanguageComboBox.Services
 {
     public interface ILanguageSuggestionProvider
     {

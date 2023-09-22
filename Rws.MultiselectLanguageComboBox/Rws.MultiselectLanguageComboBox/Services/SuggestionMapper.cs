@@ -1,4 +1,4 @@
-﻿using Rws.MultiselectLanguageComboBox.Models;
+﻿using Rws.MultiSelectLanguageComboBox.Models;
 using Sdl.MultiSelectComboBox.API;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Rws.MultiselectLanguageComboBox.Services
+namespace Rws.MultiSelectLanguageComboBox.Services
 {
     internal class SuggestionMapper : ISuggestionProvider
     {

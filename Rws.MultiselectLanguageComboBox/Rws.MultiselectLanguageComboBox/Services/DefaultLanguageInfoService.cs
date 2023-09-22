@@ -1,4 +1,4 @@
-﻿using Rws.MultiselectLanguageComboBox.Models;
+﻿using Rws.MultiSelectLanguageComboBox.Models;
 using Sdl.MultiSelectComboBox.API;
 using System;
 using System.Globalization;
@@ -8,12 +8,12 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace Rws.MultiselectLanguageComboBox.Services
+namespace Rws.MultiSelectLanguageComboBox.Services
 {
     public class DefaultLanguageInfoService : ILanguageInfoService
     {
         private readonly LanguageItemGroup _allGroup = new LanguageItemGroup(int.MaxValue, "All");
-        private readonly ResourceDictionary _resources = new ResourceDictionary { Source = new Uri("pack://application:,,,/Rws.MultiselectLanguageComboBox;component/Resources/Images.xaml", UriKind.Absolute) };
+        private readonly ResourceDictionary _resources = new ResourceDictionary { Source = new Uri("pack://application:,,,/Rws.MultiSelectLanguageComboBox;component/Resources/Images.xaml", UriKind.Absolute) };
 
         public virtual string GetDisplayName(string language)
         {

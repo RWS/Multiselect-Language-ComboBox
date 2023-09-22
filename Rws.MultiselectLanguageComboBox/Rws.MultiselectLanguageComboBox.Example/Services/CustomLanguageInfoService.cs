@@ -1,9 +1,9 @@
-﻿using Rws.MultiselectLanguageComboBox.Models;
-using Rws.MultiselectLanguageComboBox.Services;
+﻿using Rws.MultiSelectLanguageComboBox.Models;
+using Rws.MultiSelectLanguageComboBox.Services;
 using Sdl.MultiSelectComboBox.API;
 using System.Collections.Generic;
 
-namespace Rws.MultiselectLanguageComboBox.Example.Services
+namespace Rws.MultiSelectLanguageComboBox.Example.Services
 {
     public class CustomLanguageInfoService : DefaultLanguageInfoService
     {

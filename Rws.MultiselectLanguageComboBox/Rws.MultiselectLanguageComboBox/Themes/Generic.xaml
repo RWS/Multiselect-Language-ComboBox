@@ -1,11 +1,11 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:Rws.MultiselectLanguageComboBox"
-    xmlns:models="clr-namespace:Rws.MultiselectLanguageComboBox.Models"
+    xmlns:local="clr-namespace:Rws.MultiSelectLanguageComboBox"
+    xmlns:models="clr-namespace:Rws.MultiSelectLanguageComboBox.Models"
     xmlns:sdl="http://schemas.sdl.com/xaml">
 
-    <Style TargetType="{x:Type local:MultiselectLanguageComboBox}" BasedOn="{StaticResource {x:Type sdl:MultiSelectComboBox}}">
+    <Style TargetType="{x:Type local:MultiSelectLanguageComboBox}" BasedOn="{StaticResource {x:Type sdl:MultiSelectComboBox}}">
         <Setter Property="SelectedItemTemplate">
             <Setter.Value>
                 <DataTemplate DataType="models:LanguageItem">

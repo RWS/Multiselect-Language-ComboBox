@@ -1,11 +1,10 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Windows.Media;
 using Sdl.MultiSelectComboBox.API;
 
-namespace Rws.MultiselectLanguageComboBox.Models
+namespace Rws.MultiSelectLanguageComboBox.Models
 {
     public class LanguageItem : IItemEnabledAware, IItemGroupAware, INotifyPropertyChanged
     {

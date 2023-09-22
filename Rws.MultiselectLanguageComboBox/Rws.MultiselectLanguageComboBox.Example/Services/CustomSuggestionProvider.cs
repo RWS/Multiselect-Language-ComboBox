@@ -1,4 +1,4 @@
-﻿using Rws.MultiselectLanguageComboBox.Services;
+﻿using Rws.MultiSelectLanguageComboBox.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Rws.MultiselectLanguageComboBox.Example.Services
+namespace Rws.MultiSelectLanguageComboBox.Example.Services
 {
     public class CustomSuggestionProvider : ILanguageSuggestionProvider
     {

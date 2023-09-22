@@ -1,13 +1,13 @@
-﻿<Window x:Class="Rws.MultiselectLanguageComboBox.Example.MainWindow"
+﻿<Window x:Class="Rws.MultiSelectLanguageComboBox.Example.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:lc="clr-namespace:Rws.MultiselectLanguageComboBox;assembly=Rws.MultiselectLanguageComboBox"
+        xmlns:lc="clr-namespace:Rws.MultiSelectLanguageComboBox;assembly=Rws.MultiSelectLanguageComboBox"
         mc:Ignorable="d"
-        Title="MultiselectLanguageComboBox Example" Height="450" Width="800">
+        Title="MultiSelectLanguageComboBox Example" Height="450" Width="800">
     <StackPanel DataContext="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
-        <lc:MultiselectLanguageComboBox x:Name="LanguageComboBox" Margin="4"
+        <lc:MultiSelectLanguageComboBox x:Name="LanguageComboBox" Margin="4"
             SelectedLanguages="{Binding SelectedLanguages}"/>
     </StackPanel>
 </Window>

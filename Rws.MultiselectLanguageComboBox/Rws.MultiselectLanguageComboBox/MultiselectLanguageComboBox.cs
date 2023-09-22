@@ -3,11 +3,11 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Windows;
-using Rws.MultiselectLanguageComboBox.Models;
-using Rws.MultiselectLanguageComboBox.Services;
+using Rws.MultiSelectLanguageComboBox.Models;
+using Rws.MultiSelectLanguageComboBox.Services;
 using Sdl.MultiSelectComboBox.Themes.Generic;
 
-namespace Rws.MultiselectLanguageComboBox
+namespace Rws.MultiSelectLanguageComboBox
 {
     /// <summary>
     /// Specialized MultiSelectComboBox component that shows and allows the end user to select from a set of languages.
@@ -16,7 +16,7 @@ namespace Rws.MultiselectLanguageComboBox
     /// <see cref="SelectedLanguages"/> provides support for language multi-selection, specifying and allowing reading which languages are currently selected (their string IDs).
     /// If you use single selection (using <see cref="MultiSelectComboBox.SelectionMode"/> property, you can also use the shortcut single selection property <see cref="SelectedLanguage"/>, instead.
     /// </summary>
-    public class MultiselectLanguageComboBox : MultiSelectComboBox
+    public class MultiSelectLanguageComboBox : MultiSelectComboBox
     {
         private ILanguageInfoService _languageInfoService;
         private ILanguageSuggestionProvider _languageSuggestionProvider;
@@ -24,19 +24,19 @@ namespace Rws.MultiselectLanguageComboBox
         private readonly Dictionary<string, LanguageItem> _languageItemsMap = new Dictionary<string, LanguageItem>();
         private bool _isDuringInternalSelectedLanuageSet;
 
-        static MultiselectLanguageComboBox()
+        static MultiSelectLanguageComboBox()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(MultiselectLanguageComboBox), new FrameworkPropertyMetadata(typeof(MultiselectLanguageComboBox)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(MultiSelectLanguageComboBox), new FrameworkPropertyMetadata(typeof(MultiSelectLanguageComboBox)));
         }
 
-        public MultiselectLanguageComboBox()
+        public MultiSelectLanguageComboBox()
         {
             SetValue(LanguagesSourceProperty, new ObservableCollection<string>(CultureInfo.GetCultures(CultureTypes.SpecificCultures).OrderBy(c => c.EnglishName).Select(c => c.Name)));
             SetValue(SelectedLanguagesProperty, new ObservableCollection<string>());
         }
 
         public static readonly DependencyProperty LanguagesSourceProperty = 
-            DependencyProperty.Register("LanguagesSource", typeof(ObservableCollection<string>), typeof(MultiselectLanguageComboBox), 
+            DependencyProperty.Register("LanguagesSource", typeof(ObservableCollection<string>), typeof(MultiSelectLanguageComboBox), 
                 new FrameworkPropertyMetadata(new PropertyChangedCallback(OnLanguagesSourceChanged)));
         
         /// <summary>
@@ -50,12 +50,12 @@ namespace Rws.MultiselectLanguageComboBox
 
         private static void OnLanguagesSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var component = d as MultiselectLanguageComboBox;
+            var component = d as MultiSelectLanguageComboBox;
             component?.OnLanguagesSourceChanged(e.OldValue as ObservableCollection<string>);
         }
 
         public static readonly DependencyProperty SelectedLanguagesProperty = 
-            DependencyProperty.Register("SelectedLanguages", typeof(ObservableCollection<string>), typeof(MultiselectLanguageComboBox), 
+            DependencyProperty.Register("SelectedLanguages", typeof(ObservableCollection<string>), typeof(MultiSelectLanguageComboBox), 
                 new FrameworkPropertyMetadata(new PropertyChangedCallback(OnSelectedLanguagesChanged)));
 
         /// <summary>
@@ -69,12 +69,12 @@ namespace Rws.MultiselectLanguageComboBox
 
         private static void OnSelectedLanguagesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var component = d as MultiselectLanguageComboBox;
+            var component = d as MultiSelectLanguageComboBox;
             component?.OnSelectedLanguagesChanged(e.OldValue as ObservableCollection<string>);
         }
 
         public static readonly DependencyProperty SelectedLanguageProperty =
-            DependencyProperty.Register("SelectedLanguage", typeof(string), typeof(MultiselectLanguageComboBox),
+            DependencyProperty.Register("SelectedLanguage", typeof(string), typeof(MultiSelectLanguageComboBox),
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, OnSelectedLanguageChanged));
 
         /// <summary>
@@ -89,7 +89,7 @@ namespace Rws.MultiselectLanguageComboBox
 
         private static void OnSelectedLanguageChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var component = d as MultiselectLanguageComboBox;
+            var component = d as MultiSelectLanguageComboBox;
             component?.OnSelectedLanguageChanged();
         }
 

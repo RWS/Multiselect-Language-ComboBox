@@ -1,6 +1,6 @@
 ﻿using Sdl.MultiSelectComboBox.API;
 
-namespace Rws.MultiselectLanguageComboBox.Models
+namespace Rws.MultiSelectLanguageComboBox.Models
 {
 	public class LanguageItemGroup : IItemGroup
 	{

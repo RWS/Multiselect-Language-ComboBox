@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Rws.MultiselectLanguageComboBox\Rws.MultiselectLanguageComboBox.csproj" />
+    <ProjectReference Include="..\Rws.MultiSelectLanguageComboBox\Rws.MultiSelectLanguageComboBox.csproj" />
   </ItemGroup>
 
 </Project>

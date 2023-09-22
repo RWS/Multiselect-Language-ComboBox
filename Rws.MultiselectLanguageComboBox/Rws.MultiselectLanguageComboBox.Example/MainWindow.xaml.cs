@@ -1,10 +1,9 @@
-﻿using Rws.MultiselectLanguageComboBox.Example.Services;
-using Rws.MultiselectLanguageComboBox.Models;
+﻿using Rws.MultiSelectLanguageComboBox.Example.Services;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 
-namespace Rws.MultiselectLanguageComboBox.Example
+namespace Rws.MultiSelectLanguageComboBox.Example
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

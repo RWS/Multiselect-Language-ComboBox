@@ -5,7 +5,7 @@
     <UseWPF>true</UseWPF>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>..\..\SdlCommunity.snk</AssemblyOriginatorKeyFile>
-    <Title>Rws.MultiselectLanguageComboBox</Title>
+    <Title>Rws.MultiSelectLanguageComboBox</Title>
     <Description>WPF custom control with multiple language selection capabilities (shown by flags), customizable item grouping, sorting and filtering for the collection.</Description>
     <Copyright>Copyright © Sdl Community 2023</Copyright>
     <PackageTags>WPF MultiselectLanguageCombo</PackageTags>
