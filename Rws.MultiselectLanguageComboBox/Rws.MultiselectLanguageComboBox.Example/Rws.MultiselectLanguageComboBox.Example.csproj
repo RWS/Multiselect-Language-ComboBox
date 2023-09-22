@@ -2,13 +2,12 @@
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <Nullable>enable</Nullable>
+    <TargetFrameworks>net48;net6.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Rws.MultiselectLanguageComboBox\Rws.MultiselectLanguageComboBox.csproj" />
+    <ProjectReference Include="..\Rws.MultiSelectLanguageComboBox\Rws.MultiSelectLanguageComboBox.csproj" />
   </ItemGroup>
 
 </Project>

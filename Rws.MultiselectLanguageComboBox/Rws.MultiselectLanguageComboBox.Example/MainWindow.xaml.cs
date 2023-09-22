@@ -1,19 +1,9 @@
-﻿using System;
+﻿using Rws.MultiSelectLanguageComboBox.Example.Services;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace Rws.MultiselectLanguageComboBox.Example
+namespace Rws.MultiSelectLanguageComboBox.Example
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -23,6 +13,18 @@ namespace Rws.MultiselectLanguageComboBox.Example
         public MainWindow()
         {
             InitializeComponent();
+
+            DataContext = this;
+
+            LanguageComboBox.LanguageInfoService = new CustomLanguageInfoService
+            {
+                RecentLanguages = new List<string> { "en-US", "en-GB" }
+            };
+
+            LanguageComboBox.LanguageSuggestionProvider = new CustomSuggestionProvider(AvailableLanguages);
         }
+
+        public ObservableCollection<string> AvailableLanguages { get; set; } = new ObservableCollection<string>(new[] { "en-US", "en-GB", "ro-RO", "ro-MD" } );
+        public ObservableCollection<string> SelectedLanguages { get; set; } = new ObservableCollection<string>(new[] { "en-US", "ro-RO" });
     }
 }
