@@ -21,7 +21,8 @@ namespace Rws.MultiSelectLanguageComboBox.Example
                 RecentLanguages = new List<string> { "en-US", "en-GB" }
             };
 
-            LanguageComboBox.LanguageSuggestionProvider = new CustomSuggestionProvider(AvailableLanguages);
+            // Optionally set available languages:
+            // LanguageComboBox.LanguageSuggestionProvider = new CustomSuggestionProvider(AvailableLanguages);
         }
 
         public ObservableCollection<string> AvailableLanguages { get; set; } = new ObservableCollection<string>(new[] { "en-US", "en-GB", "ro-RO", "ro-MD" } );
