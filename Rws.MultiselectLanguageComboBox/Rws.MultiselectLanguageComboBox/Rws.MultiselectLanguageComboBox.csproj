@@ -11,10 +11,11 @@
     <PackageTags>WPF MultiselectLanguageCombo</PackageTags>
     <RepositoryUrl>https://github.com/sdl/Multiselect-Language-ComboBox</RepositoryUrl>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	<VersionPrefix>1.0.1</VersionPrefix>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Sdl.MultiSelectComboBox" Version="1.0.73" />
+    <PackageReference Include="Sdl.MultiSelectComboBox" Version="1.0.77" />
   </ItemGroup>
 
 </Project>
