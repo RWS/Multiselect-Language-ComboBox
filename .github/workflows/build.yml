@@ -45,7 +45,7 @@ jobs:
       uses: actions/setup-dotnet@v4
 
     # Create the NuGet package in the folder from the environment variable NuGetDirectory
-    - run: dotnet build --configuration Release --output ${{ env.NuGetDirectory }} .\Rws.MultiselectLanguageComboBox\Rws.MultiselectLanguageComboBox\Rws.MultiselectLanguageComboBox.csproj --p:Version=${{ env.major }}.${{ env.minor }}.${{ env.patch }}
+    - run: dotnet build --configuration Release --output ${{ env.NuGetDirectory }} .\Rws.MultiselectLanguageComboBox\Rws.MultiselectLanguageComboBox\Rws.MultiselectLanguageComboBox.csproj --p:Version=${{ env.GitVersion_Major }}.${{ env.GitVersion_Minor }}.${{ env.GitVersion_Patch }}
 
     # Publish the NuGet package as an artifact, so they can be used in the following jobs
     - uses: actions/upload-artifact@v3
