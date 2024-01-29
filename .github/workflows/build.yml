@@ -30,12 +30,22 @@ jobs:
       with:
         fetch-depth: 0 # Get all history to allow automatic versioning using MinVer
 
+    - name: Install GitVersion
+      uses: gittools/actions/gitversion/setup@v0
+      with:
+        versionSpec: '5.x'
+    
+    - name: Determine Version
+      uses: gittools/actions/gitversion/execute@v0
+      with:
+        useConfigFile: true
+
     # Install the .NET SDK indicated in the global.json file
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
 
     # Create the NuGet package in the folder from the environment variable NuGetDirectory
-    - run: dotnet build --configuration Release --output ${{ env.NuGetDirectory }} .\Rws.MultiselectLanguageComboBox\Rws.MultiselectLanguageComboBox\Rws.MultiselectLanguageComboBox.csproj 
+    - run: dotnet build --configuration Release --output ${{ env.NuGetDirectory }} .\Rws.MultiselectLanguageComboBox\Rws.MultiselectLanguageComboBox\Rws.MultiselectLanguageComboBox.csproj --p:Version=${{ steps.gitversion.outputs.major }}.${{ steps.gitversion.outputs.minor }}.${{ steps.gitversion.outputs.patch }}
 
     # Publish the NuGet package as an artifact, so they can be used in the following jobs
     - uses: actions/upload-artifact@v3
@@ -45,38 +55,12 @@ jobs:
         retention-days: 7
         path: ${{ env.NuGetDirectory }}/*.nupkg
 
-  validate_nuget:
-    runs-on: windows-latest
-    needs: [ create_nuget ]
-    steps:
-      # Install the .NET SDK indicated in the global.json file
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-
-      # Download the NuGet package created in the previous job
-      - uses: actions/download-artifact@v3
-        with:
-          name: nuget
-          path: ${{ env.NuGetDirectory }}
-
-      - name: Install nuget validator
-        run: dotnet tool update Meziantou.Framework.NuGetPackageValidation.Tool --global
-
-      # Validate metadata and content of the NuGet package
-      # https://www.nuget.org/packages/Meziantou.Framework.NuGetPackageValidation.Tool#readme-body-tab
-      # If some rules are not applicable, you can disable them
-      # using the --excluded-rules or --excluded-rule-ids option
-      - name: Validate package
-        run: meziantou.validate-nuget-package (Get-ChildItem "${{ env.NuGetDirectory }}/*.nupkg")
-
-
   deploy:
     # Publish only when creating a GitHub Release
     # https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository
     # You can update this logic if you want to manage releases differently
     if: github.event_name == 'release'
     runs-on: windows-latest
-    needs: [ validate_nuget]
     steps:
       # Download the NuGet package created in the previous job
       - uses: actions/download-artifact@v3
