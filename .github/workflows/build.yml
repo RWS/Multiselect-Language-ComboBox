@@ -43,6 +43,8 @@ jobs:
     # Install the .NET SDK indicated in the global.json file
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
+      with:
+         dotnet-version: '8.0.x'
 
     # Create the NuGet package in the folder from the environment variable NuGetDirectory
     - run: dotnet build --configuration Release --output ${{ env.NuGetDirectory }} .\Rws.MultiselectLanguageComboBox\Rws.MultiselectLanguageComboBox\Rws.MultiselectLanguageComboBox.csproj --p:Version=${{ env.GitVersion_Major }}.${{ env.GitVersion_Minor }}.${{ env.GitVersion_Patch }}
