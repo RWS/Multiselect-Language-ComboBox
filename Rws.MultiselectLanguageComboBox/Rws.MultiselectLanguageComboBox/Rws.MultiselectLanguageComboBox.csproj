@@ -10,9 +10,19 @@
     <Copyright>Copyright © Sdl Community 2023</Copyright>
     <PackageTags>WPF MultiselectLanguageCombo</PackageTags>
     <RepositoryUrl>https://github.com/sdl/Multiselect-Language-ComboBox</RepositoryUrl>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-	<VersionPrefix>1.0.1</VersionPrefix>
+    <IsPackable>true</IsPackable>
+    <version>1.0.0</version>
+    <PackageId>Rws.MultiSelectLanguageComboBox</PackageId>
+    <Authors>RWS</Authors>
+    <Company>RWS</Company>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="bin/Release/**/*.*">
+      <PackagePath>Rws.MultiselectLanguageComboBox</PackagePath>
+      <Pack>true</Pack>
+    </Content>
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Sdl.MultiSelectComboBox" Version="1.0.77" />
