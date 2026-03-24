@@ -1,4 +1,4 @@
-workflow: Mainline
+mode: Mainline
 commit-message-incrementing: Enabled
 major-version-bump-message: '\+semver:\s?(breaking|major)'
 minor-version-bump-message: '\+semver:\s?(feature|minor)'
@@ -7,19 +7,20 @@ no-bump-message: '\+semver:\s?(none|skip)'
 branches:
   main:
     regex: ^master$|^main$
-    label: ''
+    tag: ''
     increment: Patch
+    is-mainline: true
   feature:
     regex: ^features?[/-]|^LCC-|^bugfix[/-]|^fix[/-]
-    label: '{BranchName}'
+    tag: useBranchName
   pull-request:
     regex: ^(pull|pull\-requests|pr)[/-]
-    label: pr
+    tag: pr
   support:
     regex: ^rev(ision)?[/-]
-    label: rev
+    tag: rev
     increment: None
   hotfix:
     regex: ^hotfix(es)?[/-]
-    label: hf
+    tag: hf
     increment: None
