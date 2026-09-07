@@ -25,7 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Sdl.MultiSelectComboBox" Version="1.0.109" />
+    <PackageReference Include="Sdl.MultiSelectComboBox" Version="1.0.114" />
   </ItemGroup>
 
 </Project>
